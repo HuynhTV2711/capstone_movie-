@@ -1,0 +1,15 @@
+.cum_rap .ant-tabs-tab{
+    padding: 0 !important;
+}
+
+.cum_rap .ant-tabs-nav-operations{
+    display: none !important;
+
+}
+.ant-tabs-ink-bar{
+    background-color: red !important;
+}
+.cum_rap .ant-tabs-content-holder{
+    overflow-y: scroll;
+    height: 100%;
+}
