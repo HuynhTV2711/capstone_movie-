@@ -23,4 +23,4 @@ khi cài thành công kiểm tra  extendsion sáng trên browser là ok
 8. moment để format thời gian
 
 ********************************
-line-clamp-2 để giới hạn số dòng
+line-clamp-2 để giới hạn số dòng# capstone_movie-
