@@ -53,27 +53,37 @@ const Header = () => {
                 : "text-sm font-semibold leading-6 text-gray-900";
             }}
           >
-            Trang chủ
+            Lịch chiếu
           </NavLink>
           <NavLink
-            to={"/listGiay"}
+            to={"/cum-rap"}
             className={({ isActive, isPending }) => {
               return isActive
                 ? "text-red-500 text-sm font-semibold leading-6"
                 : "text-sm font-semibold leading-6 text-gray-900";
             }}
           >
-            ListGiay
+            Cụm rạp
           </NavLink>
           <NavLink
-            to={"/form"}
+            to={"/tin-tuc"}
             className={({ isActive, isPending }) => {
               return isActive
                 ? "text-red-500 text-sm font-semibold leading-6"
                 : "text-sm font-semibold leading-6 text-gray-900";
             }}
           >
-            Formik-yup
+            Tin tức
+          </NavLink>
+          <NavLink
+            to={"/ung-dung"}
+            className={({ isActive, isPending }) => {
+              return isActive
+                ? "text-red-500 text-sm font-semibold leading-6"
+                : "text-sm font-semibold leading-6 text-gray-900";
+            }}
+          >
+            Ứng dụng
           </NavLink>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">

@@ -5,6 +5,15 @@ export const quanLyFilmServ ={
         return https.get("/api/QuanLyPhim/LayDanhSachBanner", )
     },
     getAllFilm : ()=>{
-        return https.get("/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01")
+        return https.get("/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP09")
     },
+    deleteFilm: (maPhim)=>{
+        return https.delete(`/api/QuanLyPhim/XoaPhim?MaPhim=${maPhim}`)
+    },
+    addMovie: (data)=>{
+        return https.post(`/api/QuanLyPhim/ThemPhimUploadHinh`, data)
+    },
+    detailMovie: (maPhim)=>{
+        return https.get(`/api/QuanLyPhim/LayThongTinPhim?MaPhim=${maPhim}`)
+    }
 }

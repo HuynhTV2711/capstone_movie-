@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Carousel } from 'antd'
 import { quanLyFilmServ } from "../../services/quanLyFilmServ";
+import { useDispatch } from "react-redux";
+import { endLoading, startLoading } from "../../redux/slice/loadingSlice";
 
 const contentStyle = {
     margin: 0,
@@ -37,13 +39,19 @@ const contentStyle = {
   }
 const Banner = () => {
     const [listBanner, setListBanner] = useState([]);
+    const dispatch = useDispatch();
     useEffect(()=>{
+      // xét trang thái isActive == true để loading xuất hiện
+      // sau khi gọi dữ liệu thành công sẽ tắt loading, thất bại cũng tắt loading
+      dispatch(startLoading())
         quanLyFilmServ.getAllBanner()
         .then((result) => {
             // console.log(result.data.content);
             setListBanner(result.data.content);
+            dispatch(endLoading())
         }).catch((err) => {
             console.log(err);
+            dispatch(endLoading())
         });
     },[])
 

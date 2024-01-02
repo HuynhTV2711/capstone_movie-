@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { quanLyFilmServ } from '../../services/quanLyFilmServ';
+import { useNavigate } from 'react-router-dom';
 
 
 const ListFilm = () => {
+    const navigate = useNavigate();
     const [listFilm, setListFilm] = useState([]);
     useEffect(() => {
             quanLyFilmServ.getAllFilm()
@@ -14,12 +16,13 @@ const ListFilm = () => {
                 });
         },[])
     return (
-        <div className='grid grid-cols-4 w-96 mx-auto gap-5'>
+        <div className='grid grid-cols-4 container mx-auto gap-5 mt-10'>
             {listFilm?.map((item, index) => {
-                return <div>
-                    <img src={item.hinhAnh} alt="" width={100} height={100}/>
-                    <p>{item.tenPhim}</p>
-                    <p className='line-clamp-2'>{item.moTa}</p>
+                return <div className='px-4 py-2 rounded bg-gray-100'>
+                    <img src={item.hinhAnh} alt="" className='mx-auto w-96 max-h-64 object-cover rounded'/>
+                    <p className='text-xl font-bold'>{item.tenPhim}</p>
+                    <p className='text-sm font-semibold text-gray-500 line-clamp-2'>{item.moTa}</p>
+                    <button onClick={()=>{navigate(`/detail/${item.maPhim}`)}} className='text-white bg-blue-500 px-4 py-2 font-semibold rounded mt-5'>Mua vé</button>
                 </div>
             })}
         </div>

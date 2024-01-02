@@ -1,0 +1,10 @@
+.ant-modal .ant-modal-content {
+    background-color: transparent;
+    box-shadow: none;
+}
+.ant-modal .ant-modal-header{
+    background-color: transparent;
+}
+.ant-btn {
+    height: auto;
+}
