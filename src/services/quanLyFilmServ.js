@@ -15,5 +15,8 @@ export const quanLyFilmServ ={
     },
     detailMovie: (maPhim)=>{
         return https.get(`/api/QuanLyPhim/LayThongTinPhim?MaPhim=${maPhim}`)
+    },
+    lichChieuPhim: (maPhim)=>{
+        return https.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`)
     }
 }

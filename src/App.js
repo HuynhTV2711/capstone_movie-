@@ -9,6 +9,7 @@ import OrderManager from "./pages/OrderManager/OrderManager";
 import AddMovie from "./pages/AddMovie/AddMovie";
 import Register from "./pages/Register/Register";
 import DetailFilm from "./pages/DetailFilm/DetailFilm";
+import DatVe from "./pages/DatVe/DatVe";
 function App() {
   return (
     <>
@@ -20,6 +21,8 @@ function App() {
           <Route element={<HomePage />} index />
           {/* chi tiet phim */}
           <Route element={<DetailFilm/>} path="detail/:maPhim"/>
+          {/* Dat ve */}
+          <Route element={<DatVe/>} path="chitietphongve/:maLichChieu"/>
         </Route>
         <Route element={<AdminTemplate />} path="/admin">
           <Route element={<MovieManager />} index />

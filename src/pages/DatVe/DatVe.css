@@ -1,0 +1,24 @@
+.ghe{
+    /* padding: 5px 5px; */
+    text-align: center;line-height: 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 20%;
+    color: white;
+    font-weight: 500;
+}
+.ghe_thuong{
+    background-color: gray !important;
+}
+
+.ghe_vip{
+    background-color: orange;
+}
+
+
+.ghe_da_dat{
+    background-color: red;
+}
+.ghe_dang_chon{
+    background-color: green;
+}

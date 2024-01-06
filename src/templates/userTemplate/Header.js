@@ -5,7 +5,7 @@ const Header = () => {
   const {user} = useSelector((state)=>{
    return state.userSlice
   })
-  console.log(user);
+  // console.log(user);
   return (
     <header className="bg-white">
       <nav
