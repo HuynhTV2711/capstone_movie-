@@ -22,8 +22,8 @@ const AdminTemplate = () => {
   // phân quyền
   useEffect(()=>{
     // kiểm tra người dùng nếu không phai admin nếu k phải là người dùng thì k cho phép vào trang admin và chuyển hướng đến trang khác
-    console.log(location);
-    console.log(user);
+    // console.log(location);
+    // console.log(user);
     if (user) {
       if (user.maLoaiNguoiDung !="QuanTri") {
         messageApi.open({

@@ -22,7 +22,7 @@ const DetailFilm = () => {
     useEffect(() => {
         quanLyFilmServ.detailMovie(params.maPhim)
             .then((result) => {
-                console.log(result.data.content);
+                // console.log(result.data.content);
                 setDetail(result.data.content);
                 setTrailer(result.data.content.trailer.replace('https://www.youtube.com/watch?v=', 'https://www.youtube.com/embed/'));
 
@@ -43,7 +43,7 @@ const DetailFilm = () => {
                     item.cumRapChieu.map((itemChild, indexChild)=>{
                         // console.log(itemChild);
                         itemChild.lichChieuPhim.map((item2, index2)=>{
-                            console.log(item2.maLichChieu);
+                            // console.log(item2.maLichChieu);
                            setMaLichChieu(item2.maLichChieu);
                         })
                     })
@@ -109,7 +109,7 @@ const DetailFilm = () => {
                                             <br />
                                             <span className="text-gray-500 font-semibold text-xl">{item.diaChi}</span>
                                             <div>{item.lichChieuPhim.map((item, index) => {
-                                        console.log(item);
+                                        // console.log(item);
                                         return <div>
                                             <button onClick={()=>{navigate(`/chitietphongve/${item.maLichChieu}`)}} className="text-green-500 bg-gray-200 text-xl font-semibold rounded px-4 py-3">
                                                 {moment(item.ngayChieuGioChieu).format('MMMM Do YYYY, h:mm:ss a')}

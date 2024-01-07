@@ -6,12 +6,12 @@ import moment from "moment";
 
 
 const LichChieuCumRap = ({ maHeThongRap }) => {
-    console.log(maHeThongRap);
+    // console.log(maHeThongRap);
     const [cumRap, setCumRap] = useState([])
     useEffect(() => {
         quanLyRapServ.getInforLichChieuTheoRap(maHeThongRap)
             .then((result) => {
-                console.log(result.data.content[0].lstCumRap);
+                // console.log(result.data.content[0].lstCumRap);
                 setCumRap(result.data.content[0].lstCumRap);
             }).catch((err) => {
                 console.log(err);

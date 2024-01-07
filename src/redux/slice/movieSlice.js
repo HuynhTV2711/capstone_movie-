@@ -6,7 +6,7 @@ export const getAllMovieThunk = createAsyncThunk(
     'movie/getAllMovieThunk',
     async (data, thunkAPI) => {
         // data được dùng như lấy chi tiết movie(id), hoặc data them mới giống như action
-        console.log(data);
+        // console.log(data);
         //gọi dữ liệu từ sever để lấy data
         const res = await quanLyFilmServ.getAllFilm();
         return res.data.content
@@ -24,9 +24,9 @@ const movieSlice = createSlice({
   extraReducers: (builder)=>{
     // fulfilled là trạng thái của thunk khi lấy dữ liệu thành công
     builder.addCase(getAllMovieThunk.fulfilled, (state, action)=>{
-        console.log(state);
+        // console.log(state);
         // nhận về dữ liệu được trả về bên trên res.data.content
-        console.log(action);
+        // console.log(action);
         state.listMovie = action.payload;
     })
   }

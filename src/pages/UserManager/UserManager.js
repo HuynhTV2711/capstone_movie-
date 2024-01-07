@@ -18,7 +18,7 @@ const UserManager = () => {
       hoTen: ""
     },
     onSubmit: (values) => {
-      console.log(values);
+      // console.log(values);
       quanLyUser.addUser(values)
       .then((result) => {
         messageApi.open({

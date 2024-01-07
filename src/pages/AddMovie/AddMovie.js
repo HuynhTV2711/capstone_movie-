@@ -23,7 +23,7 @@ const AddMovie = () => {
       hinhAnh: "",
     },
     onSubmit: (values) => {
-      console.log(values);
+      // console.log(values);
       const formData = new FormData();
       for (const key in values) { 
         // console.log(key);

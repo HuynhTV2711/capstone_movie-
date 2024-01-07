@@ -112,7 +112,6 @@ const DatVe = () => {
                                         "danhSachVe": gheChon,
                                     })
                                         .then((result) => {
-                                            // console.log(result);
                                             setGheChon([]);
                                             messageApi.open({
                                                 type: 'success',
@@ -127,7 +126,7 @@ const DatVe = () => {
                                         }).catch((err) => {
                                             messageApi.open({
                                                 type: 'error',
-                                                content: "Chưa đặt được vé, xin thử lại!",
+                                                content: err.message,
                                             });
                                         });
                                 } else {
