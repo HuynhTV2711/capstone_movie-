@@ -8,7 +8,7 @@
     font-weight: 500;
 }
 .ghe_thuong{
-    background-color: gray !important;
+    background-color: gray;
 }
 
 .ghe_vip{
@@ -18,7 +18,8 @@
 
 .ghe_da_dat{
     background-color: red;
+    pointer-events: none;
 }
 .ghe_dang_chon{
-    background-color: green;
+    background-color: green !important;
 }

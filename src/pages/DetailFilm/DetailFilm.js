@@ -55,7 +55,7 @@ const DetailFilm = () => {
     return (
         <div>
             <div className="h-screen flex items-center justify-center">
-                <div className="container">
+                <div className="container shadow py-10">
                     <div className="grid grid-cols-2">
                         <div className="col_left">
                             <img src={detail.hinhAnh} alt="" className="h-96 mx-auto rounded" />
@@ -63,7 +63,7 @@ const DetailFilm = () => {
                         <div className="col_right space-y-5">
                             <p className="text-3xl text-blue-400 font-semibold">{detail.tenPhim}</p>
                             <p className="text-xl font-semibold">Ngày khởi chiếu: <span className="text-gray-500">{moment(detail.ngayKhoiChieu).subtract(10, 'days').calendar()}</span></p>
-                            <p className="text-xl font-semibold">Mô tả: <span className="text-gray-500">{detail.moTa}</span></p>
+                            <p className="text-xl font-semibold">Mô tả: <span className="text-gray-500 md:line-clamp-3 lg:line-clamp-none line-clamp-3">{detail.moTa}</span></p>
                             <p className="text-xl font-semibold">Đánh giá: <Rate disabled allowHalf value={detail.danhGia} count={10} /></p>
                             <>
                                 <Button className='text-white bg-green-500 px-4 py-2 font-semibold rounded mt-5 mr-5' onClick={() => setOpen(true)}>
@@ -89,7 +89,7 @@ const DetailFilm = () => {
             </div>
             <div>
             </div>
-            <div>
+            <div className="container shadow py-10">
                 <Tabs
                     defaultActiveKey="1"
                     tabPosition={mode}
@@ -103,21 +103,22 @@ const DetailFilm = () => {
                             children: <div>{item.cumRapChieu.map((item, index) => {
                                 return <div>
                                     <div className="flex gap-10 mb-5">
-                                        <img src={item.hinhAnh} alt="" width={50} />
-                                        <div>
-                                            <span className="font-semibold">{item.tenCumRap}</span>
+                                        <img src={item.hinhAnh} alt="" width={90} />
+                                        <div className="space-y-3">
+                                            <span className="font-semibold uppercase text-2xl text-green-500">{item.tenCumRap}</span>
                                             <br />
-                                            <span className="text-gray-500">{item.diaChi}</span>
-                                        </div>
-                                    </div>
-                                    <div>{item.lichChieuPhim.map((item, index) => {
+                                            <span className="text-gray-500 font-semibold text-xl">{item.diaChi}</span>
+                                            <div>{item.lichChieuPhim.map((item, index) => {
                                         console.log(item);
                                         return <div>
-                                            <span onClick={()=>{navigate(`/chitietphongve/${item.maLichChieu}`)}} className="text-green-500 bg-gray-300 rounded px-4 py-2">
+                                            <button onClick={()=>{navigate(`/chitietphongve/${item.maLichChieu}`)}} className="text-green-500 bg-gray-200 text-xl font-semibold rounded px-4 py-3">
                                                 {moment(item.ngayChieuGioChieu).format('MMMM Do YYYY, h:mm:ss a')}
-                                            </span>
+                                            </button>
                                         </div>
                                     })}</div>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             })}</div>,
                         }

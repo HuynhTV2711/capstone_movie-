@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { DatePicker, Switch, Rate } from "antd";
+import { DatePicker, Switch, Rate, message } from "antd";
 import { useFormik } from "formik";
 import { validationPhimInput } from "../../util/validation";
 import './addMovie.css'
 import { quanLyFilmServ } from "../../services/quanLyFilmServ";
 
 const AddMovie = () => {
+  const [messageApi, contextHolder] = message.useMessage();
   // hình ảnh
   const [image, setImage] = useState("");
   // formik
@@ -40,9 +41,15 @@ const AddMovie = () => {
       .then((result) => {
         resetForm();
         setImage('');
-        console.log(result);
+        messageApi.open({
+          type: "success",
+          content: "Thêm phim thành công",
+        });
       }).catch((err) => {
-        console.log(err);
+        messageApi.open({
+          type: "error",
+          content: err.response.data.content,
+        });
       });
     },
     validationSchema: validationPhimInput,
@@ -59,6 +66,8 @@ const AddMovie = () => {
     setFieldValue,
   } = formik;
   return (
+    <>
+      {contextHolder}
     <div>
       <h2 className="text-2xl font-bold text-blue-500 mb-5" >
         Tạo mới film
@@ -257,6 +266,7 @@ const AddMovie = () => {
         </button>
       </form>
     </div>
+    </>
   );
 };
 

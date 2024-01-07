@@ -18,7 +18,7 @@ const LichChieuCumRap = ({ maHeThongRap }) => {
             });
     }, [maHeThongRap])
     return (
-        <div className='cum_rap'>
+        <div className='cum_rap '>
             <Tabs
                 defaultActiveKey="1"
                 tabPosition="left"
@@ -34,7 +34,7 @@ const LichChieuCumRap = ({ maHeThongRap }) => {
                             <hr />
                         </div>,
                         key: index,
-                        children:  <div className="lich_chieu_phim">
+                        children:  <div className="lich_chieu_phim sm:hidden lg:block">
                         {item.danhSachPhim.map((item, index) => {
                             // console.log(item);
                           return item.dangChieu ? (

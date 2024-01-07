@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Menu, Button, theme } from "antd";
+import { Layout, Menu, Button, theme, message } from "antd";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -11,6 +11,7 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux'
 
 const AdminTemplate = () => {
+  const [messageApi, contextHolder] = message.useMessage();
   // đá về trang đăng nhập
   const navigate = useNavigate()
   // Lấy dữ liệu trên redux về
@@ -25,8 +26,14 @@ const AdminTemplate = () => {
     console.log(user);
     if (user) {
       if (user.maLoaiNguoiDung !="QuanTri") {
-        // đưa về đường dẫn web bạn muốn
-        window.location.href= "https://redux-toolkit.js.org/api/createAsyncThunk";
+        messageApi.open({
+          type: "error",
+          content: "Vui lòng đăng nhập tài khoản quản trị viên",
+        });
+        setTimeout(() => {
+          // đưa về đường dẫn web bạn muốn
+          window.location.href= "/login";
+        }, 2000);
       }
     }
     // chưa đăng nhập
@@ -41,6 +48,8 @@ const AdminTemplate = () => {
   } = theme.useToken();
   const { Header, Sider, Content } = Layout;
   return (
+    <>
+      {contextHolder}
     <Layout className="min-h-screen">
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical" />
@@ -98,6 +107,7 @@ const AdminTemplate = () => {
         </Content>
       </Layout>
     </Layout>
+    </>
   );
 };
 

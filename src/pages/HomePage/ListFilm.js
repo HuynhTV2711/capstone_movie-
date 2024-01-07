@@ -16,9 +16,9 @@ const ListFilm = () => {
                 });
         },[])
     return (
-        <div className='grid grid-cols-4 container mx-auto gap-5 mt-10'>
+        <div className='grid grid-cols-1 lg:grid md:grid sm:grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 container mx-auto gap-5 mt-10'>
             {listFilm?.map((item, index) => {
-                return <div className='px-4 py-2 rounded bg-gray-100'>
+                return <div className='px-4 py-4 rounded bg-gray-100'>
                     <img src={item.hinhAnh} alt="" className='mx-auto w-96 max-h-64 object-cover rounded'/>
                     <p className='text-xl font-bold'>{item.tenPhim}</p>
                     <p className='text-sm font-semibold text-gray-500 line-clamp-2'>{item.moTa}</p>

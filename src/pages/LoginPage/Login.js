@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { saveInforUser } from "../../redux/slice/userSlice";
 
 const Login = () => {
+  
   // use Dispatch
   const dispatch = useDispatch();
   // navigate
@@ -30,7 +31,6 @@ const Login = () => {
         userServ
           .loginServ(values)
           .then((result) => {
-            console.log(result);
             // thông báo thành công
             messageApi.open({
               type: "success",
@@ -45,7 +45,6 @@ const Login = () => {
             }, 1000);
           })
           .catch((err) => {
-            console.log(err);
             messageApi.open({
               type: "error",
               content: err.response.data.content,

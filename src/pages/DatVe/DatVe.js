@@ -5,10 +5,6 @@ import './DatVe.css';
 import { message } from 'antd';
 
 const DatVe = () => {
-    const [isClicked, setIsClicked] = useState(false);
-    const handleClick = () => {
-        setIsClicked(prevState => !prevState); // Đảo ngược giá trị isClicked
-      };
     // ant
     const [messageApi, contextHolder] = message.useMessage();
     const params = useParams();
@@ -21,6 +17,7 @@ const DatVe = () => {
     useEffect(() => {
         quanLiDatVeServ.layDanhSachPhongVe(params.maLichChieu)
             .then((result) => {
+                // console.log(result.data.content.danhSachGhe);
                 setDanhSachGhe(result.data.content.danhSachGhe);
                 setThongTinPhim(result.data.content.thongTinPhim)
             }).catch((err) => {
@@ -31,37 +28,37 @@ const DatVe = () => {
         <>
             {contextHolder}
             <div className='container'>
-                <div className='flex justify-between'>
-                    <div className='grid grid-cols-12 gap-5 mb-10'>{danhSachGhe.map((item, index) => {
-                        let disabled = false;
-                        let cssGheDaDat = '';
-                        if (item.daDat) {
-                            cssGheDaDat = "ghe_da_dat";
-                            disabled = true;
-                        } else {
-                            if (item.loaiGhe == "Vip") {
-                                cssGheDaDat = "ghe_vip";
-                            } else {
-                                cssGheDaDat = "ghe_thuong";
+                <div className='lg:grid md:grid sm:grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 grid grid-cols-1'>
+                    <div className='mx-10 lg:grid md:grid sm:grid lg:grid-cols-12 md:grid-cols-6 sm:grid-cols-4 lg:gap-5 md:gap-4 sm:gap-3 grid grid-cols-4 mb-10 lg:overflow-y-visible md:overflow-y-auto md:h-[300px] overflow-y-auto h-[150px] gap-y-3'>{danhSachGhe.map((item, index) => {
+                        let classGheVip = item.loaiGhe == "Vip" ? "ghe_vip" : "";
+                        let classGheThuong = item.loaiGhe == "Thuong" ? "ghe_thuong" : "";
+                        let classGheDaDat = item.daDat == true ? "ghe_da_dat" : "";
+                        let classGheDangDat = "";
+                        let indexGheDangDat = gheChon.findIndex((ghe)=>{
+                            return ghe.maGhe === item.maGhe
+                        })
+                        if (indexGheDangDat != -1) {
+                            classGheDangDat = "ghe_dang_chon"
+                        }
+                        return <button key={index} className={`${classGheVip} ghe ${classGheThuong} ${classGheDaDat} ${classGheDangDat}`}  onClick={() => {
+                            if (indexGheDangDat != -1) {
+                            }else{
+                                chonGhe(item);
                             }
                         }
-                        return <button key={index} className={`${cssGheDaDat} ghe`} disabled={disabled} onClick={() => {
-                                    chonGhe(item);
-                                }
                         }>
                             {item.tenGhe}
                         </button>
                     })}</div>
                     <div className='mx-auto'>
-                        <div className='shadow-2xl mb-10 p-10'>
+                        <div className='shadow-2xl mb-10 p-10 space-y-5 md:w-full'>
                             <p className='font-bold text-3xl text-blue-500'>{thongTinPhim.tenPhim}</p>
                             <p className='font-bold text-lg'>Cụm rạp: <span className='text-green-500 font-semibold'>{thongTinPhim.tenCumRap}</span></p>
                             <p className='font-bold text-lg'>Địa chỉ: <span className='text-green-500 font-semibold'>{thongTinPhim.diaChi}</span></p>
                             <p className='font-bold text-lg'>Rạp: <span className='text-green-500 font-semibold'>{thongTinPhim.tenRap}</span></p>
                             <p className='font-bold text-lg'>Ngày giờ chiếu: <span className='text-green-500 font-semibold'>{thongTinPhim.ngayChieu} <span className='text-red-500 font-semibold'>{thongTinPhim.gioChieu}</span></span></p>
                             <p className='font-bold text-lg'>Chọn:
-
-                                <div className="relative overflow-x-auto">
+                                <div className="relative overflow-x-auto mt-5">
                                     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             <tr>
@@ -72,7 +69,7 @@ const DatVe = () => {
                                                     Giá
                                                 </th>
                                                 <th scope="col" className="px-6 py-3">
-                                                    
+
                                                 </th>
                                             </tr>
                                         </thead>
@@ -87,7 +84,7 @@ const DatVe = () => {
                                                             {item.giaVe}
                                                         </td>
                                                         <td className="px-6 py-4">
-                                                            <button className='text-red-500 text-xl' onClick={() => {setGheChon(prevItems => prevItems.filter((_, index) => index !== indexx));}}><i class="fa-regular fa-trash-can"></i></button>
+                                                            <button className='text-red-500 text-xl ' onClick={() => {setGheChon(prevItems => prevItems.filter((_, index) => index !== indexx))}}><i class="fa-regular fa-trash-can"></i></button>
                                                         </td>
                                                     </tr>
                                                 })
@@ -108,18 +105,18 @@ const DatVe = () => {
                                     </table>
                                 </div>
                             </p>
-                            <button className='font-bold text-xl px-4 py-2 bg-orange-400 text-white w-96' onClick={() => {
+                            <button className=' md:w-[100%] font-bold text-xl px-4 py-2 bg-orange-400 text-white lg:w-96 w-[100%]' onClick={() => {
                                 if (gheChon != "") {
                                     quanLiDatVeServ.datVe({
                                         "maLichChieu": params.maLichChieu,
                                         "danhSachVe": gheChon,
                                     })
                                         .then((result) => {
-                                            console.log(result);
+                                            // console.log(result);
+                                            setGheChon([]);
                                             messageApi.open({
                                                 type: 'success',
                                                 content: result.data.content,
-
                                             });
                                             quanLiDatVeServ.layDanhSachPhongVe(params.maLichChieu)
                                                 .then((result) => {
@@ -130,7 +127,7 @@ const DatVe = () => {
                                         }).catch((err) => {
                                             messageApi.open({
                                                 type: 'error',
-                                                content: err,
+                                                content: "Chưa đặt được vé, xin thử lại!",
                                             });
                                         });
                                 } else {
@@ -142,7 +139,7 @@ const DatVe = () => {
 
                             }}>Đặt vé</button>
                         </div>
-                        <div className='space-y-3 p-10'>
+                        <div className='space-y-3 p-10 md:hidden hidden lg:block'>
                             <div className='flex space-x-3 items-center'>
                                 <div className='ghe ghe_thuong'></div>
                                 <span className='text-xl font-semibold text-gray-500'>Thường</span>
@@ -163,7 +160,6 @@ const DatVe = () => {
 
                     </div>
                 </div>
-
             </div>
         </>
     )

@@ -15,7 +15,7 @@ const LichChieuTheoRap = () => {
         });
     }, [])
   return (
-    <div className='py-20 container'>
+    <div className='py-20 container '>
         
     <Tabs
         defaultActiveKey="1"

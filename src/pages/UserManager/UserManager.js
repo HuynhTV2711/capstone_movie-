@@ -1,10 +1,11 @@
-import { Table } from 'antd';
+import { Table, message } from 'antd';
 import React, { useEffect, useState } from 'react'
 import { quanLyUser } from '../../services/quanLyUser';
 import { useFormik } from 'formik';
 import { validationUser } from '../../util/validation';
 
 const UserManager = () => {
+  const [messageApi, contextHolder] = message.useMessage();
   // formik
   const formik = useFormik({
     initialValues: {
@@ -20,7 +21,10 @@ const UserManager = () => {
       console.log(values);
       quanLyUser.addUser(values)
       .then((result) => {
-        alert("Thêm user thành công");
+        messageApi.open({
+          type: "success",
+          content: "Thêm user thành công",
+        });
         resetForm();
         quanLyUser.getAllUser()
       .then((result) => {
@@ -51,7 +55,7 @@ const UserManager = () => {
   useEffect(() => {
     quanLyUser.getAllUser()
       .then((result) => {
-        console.log(result.data.content);
+        // console.log(result.data.content);
         setListUser(result.data.content)
       }).catch((err) => {
         console.log(err);
@@ -121,7 +125,10 @@ const UserManager = () => {
             // console.log(record.taiKhoan);
             quanLyUser.deleteUser(record.taiKhoan)
               .then((result) => {
-                alert(result.data.content);
+                messageApi.success({
+                  type: "error",
+                  content: result.data.content,
+                });
                 quanLyUser.getAllUser()
                   .then((result) => {
                     setListUser(result.data.content)
@@ -129,8 +136,10 @@ const UserManager = () => {
 
                   });
               }).catch((err) => {
-                alert(err.response.data.content);
-                // console.log(err.response.data.content);
+                messageApi.open({
+                  type: "error",
+                  content: err.response.data.content,
+                });
               });
           }} className="text-2xl text-red-500"><i class="fa-regular fa-trash-can"></i></button>
         </div>
@@ -141,6 +150,8 @@ const UserManager = () => {
   ];
   const data = listUser;
   return (
+    <>
+      {contextHolder}
     <div>
       <h2 className='text-2xl font-bold text-blue-500 mb-5'>Quản lí người dùng</h2>
       <form onSubmit={handleSubmit}>
@@ -175,7 +186,7 @@ const UserManager = () => {
             Mật khẩu
           </label>
           <input
-            type="text"
+            type="password"
             id="matKhau"
             name="matKhau"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -293,17 +304,24 @@ const UserManager = () => {
         <button onClick={()=>{quanLyUser.updateUser(values)
         .then((result) => {
           // console.log(result);
-          alert(result.data.message);
+          // alert(result.data.message);
+          messageApi.open({
+            type: "success",
+            content: "Cập nhật thành công",
+          });
           quanLyUser.getAllUser()
           .then((result) => {
             setListUser(result.data.content);
           resetForm();
           }).catch((err) => {
-            
+           
           });
         }).catch((err) => {
-        alert(err.message)
-          console.log(err);
+        // alert(err.message)
+        messageApi.open({
+          type: "error",
+          content: "Cập nhật thất bại",
+        });
         });
         }}  type='button' className='text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800 mt-5'>Cập nhật</button>
       </form>
@@ -311,6 +329,7 @@ const UserManager = () => {
       <Table columns={columns} dataSource={data} pagination={{ pageSize: 7, defaultCurrent: 1 }} />
     
     </div>
+    </>
   )
 }
 
